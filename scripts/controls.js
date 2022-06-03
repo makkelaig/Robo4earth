@@ -216,6 +216,7 @@ function deleteAll() {
 	/**
 	 * Delete all blockly programs from local storage
 	 */
+	createMenu(); //get all saved programs after page reload
 	if (storage_items.length === 0) {
 		alert('Keine gespeicherten Programme vorhanden');
 	} else {
