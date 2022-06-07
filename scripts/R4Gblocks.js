@@ -50,14 +50,14 @@ Blockly.Blocks['show_text'] = {
 		this.appendDummyInput()
 			.appendField("Schreibe");
 		this.appendDummyInput()
-			.appendField(new Blockly.FieldTextInput("..."), "led_text");
+			.appendField(new Blockly.FieldTextInput("WORT"), "led_text");
 		this.appendDummyInput()
 			.appendField("am Display");
 		this.setInputsInline(true);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(160);
-		this.setTooltip("Schreibe ein Wort mit bis zu 8 Buchstaben in das Eingabefeld, e wird dann am Display angezeigt.");
+		this.setTooltip("Schreibe ein Wort mit bis zu 8 Buchstaben in das Eingabefeld, es wird dann über das Display gescrollt.");
 		this.setHelpUrl("");
 	}
 };

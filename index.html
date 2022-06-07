@@ -74,7 +74,16 @@
 
     <!-- R4G blocks design -->
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none;">
-        <!-- Category Movements -->
+        <!-- Categories -->
+        <category name="Steuerung" colour="#5ba55b">
+            <block type="start_block"></block>
+            <block type="repetition">
+                <field name="repetition">1</field>
+            </block>
+			<block type="wait_seconds">
+				<field name="seconds">1</field>
+			</block>
+        </category>
         <category name="LED-Anzeige" colour="#5ba593">
             <block type="show_text"></block>
             <block type="show_picture">
@@ -165,15 +174,6 @@
 			</block>
             -->
         
-        </category>
-        <category name="Steuerung" colour="#5ba55b">
-            <block type="repetition">
-                <field name="repetition">1</field>
-            </block>
-			<block type="wait_seconds">
-				<field name="seconds">1</field>
-			</block>
-			<block type="start_block"></block>
         </category>
         <!-- Variables
         <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
