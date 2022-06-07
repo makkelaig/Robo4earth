@@ -57,7 +57,7 @@ Blockly.Blocks['show_text'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(160);
-		this.setTooltip("Schreibe einen Text in das Eingabefeld, er wird dann am Display angezeigt.");
+		this.setTooltip("Schreibe ein Wort mit bis zu 8 Buchstaben in das Eingabefeld, e wird dann am Display angezeigt.");
 		this.setHelpUrl("");
 	}
 };
@@ -139,6 +139,7 @@ Blockly.JavaScript['leds_off'] = function(block) {
    return code;
 };
 // block with input field for number or text
+/*
 Blockly.Blocks['show_value'] = {
 		init: function() {
 		this.appendValueInput("VALUE")
@@ -158,6 +159,7 @@ Blockly.JavaScript['show_value'] = function(block) {
 	value = value_name.replace('(','').replace(')','');
 	return value + delimiter;
 };
+*/
 
 // MOVEMENTS 'B'
 // Forward 'v'
@@ -167,9 +169,7 @@ Blockly.Blocks['forward'] = {
 			.appendField("Vorwärts")
 			.appendField("für")
 			.appendField(new Blockly.FieldNumber(1, 0.1, 9.9), "forward_duration")
-			.appendField("Sekunden")
-//			.appendField(new Blockly.FieldImage("./media/forward.gif", 20, 20, "*")) // Add an icon to block
-		;
+			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -190,9 +190,7 @@ Blockly.Blocks['back'] = {
 			.appendField("Rückwärts")
 			.appendField("für")
 			.appendField(new Blockly.FieldNumber(1, 0.1, 9.9), "back_duration")
-			.appendField("Sekunden")
-//			.appendField(new Blockly.FieldImage("./media/back.gif", 20, 20, "*"))
-		;
+			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -355,7 +353,8 @@ Blockly.JavaScript['shake'] = function (block) {
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(2, number_repeat, dropdown_intensity);
 };
-// Pirouette 
+// Pirouette
+/* 
 Blockly.Blocks['pirouette'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -383,8 +382,10 @@ Blockly.JavaScript['pirouette'] = function (block) {
 	}
 	return code;
 };
+*/
 
-// LOGIC
+/*
+// LOGIC 
 // Condition
 Blockly.defineBlocksWithJsonArray([ {
     type: "c_if", 
@@ -460,7 +461,7 @@ Blockly.defineBlocksWithJsonArray([{
 	tooltip: "%{BKY_MATH_NUMBER_TOOLTIP}", 
 	extensions: ["parent_tooltip_when_inline"] 
 }])
-
+*/
 // MELODY 'M/K
 // Play melody 'M'
 Blockly.Blocks['melody'] = {
@@ -598,7 +599,7 @@ Blockly.JavaScript['start_block'] = function(block) {
 	var code = 'start' + delimiter;
 	return code;
 };
-
+/*
 // Temperature
 Blockly.Blocks['temperature'] = {
 	init: function() {
@@ -616,6 +617,7 @@ Blockly.JavaScript['temperature'] = function(block) {
 	// TODO: Change ORDER_NONE to the correct strength.
 	return [code, Blockly.JavaScript.ORDER_NONE];
 };
+*/
 
 /* works only with micro:bit version 1
 // Turn display 'T'
