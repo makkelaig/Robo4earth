@@ -57,9 +57,6 @@
             <td class="control_buttons">
                     <button id="start" onclick="handlePlay();" type="button" class="button green" style="float:left;font-size: 13px;padding-left:30px;padding-right:30px;">Start</button>
                     <button id="stop" type="button" class="button rosy" style="float:left; margin-left:20px;font-size: 13px;">Stopp</button>
-                    <!--
-                    <button id="downloadHex" onclick="hexFileUploadTipp();" type="button" class="download">Micro:bit Firmware Download</button>
-                    -->
             </td>
         </tr>
         <tr>
@@ -77,7 +74,16 @@
 
     <!-- R4G blocks design -->
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none;">
-        <!-- Category Movements -->
+        <!-- Categories -->
+        <category name="Steuerung" colour="#5ba55b">
+            <block type="start_block"></block>
+            <block type="repetition">
+                <field name="repetition">1</field>
+            </block>
+			<block type="wait_seconds">
+				<field name="seconds">1</field>
+			</block>
+        </category>
         <category name="LED-Anzeige" colour="#5ba593">
             <block type="show_text"></block>
             <block type="show_picture">
@@ -107,22 +113,22 @@
         -->
         <category name="Bewegungen" colour="#5b5ba5">
             <block type="forward">
-                <field name="forward_duration">0.1</field>
+                <field name="forward_duration">1</field>
             </block>
             <block type="back">
-                <field name="back_duration">0.1</field>
+                <field name="back_duration">1</field>
             </block>
             <block type="left">
-                <field name="left_duration">0.1</field>
+                <field name="left_duration">1</field>
             </block>
             <block type="right">
-                <field name="right_duration">0.1</field>
+                <field name="right_duration">1</field>
             </block>
             <block type="turn_left">
-                <field name="turn_left_duration">0.1</field>
+                <field name="turn_left_duration">1</field>
             </block>
             <block type="turn_right">
-                <field name="turn_right_duration">0.1</field>
+                <field name="turn_right_duration">1</field>
             </block>
         </category>
 
@@ -139,10 +145,12 @@
                 <field name="repeat">1</field>
                 <field name="intensity">kurz</field>
             </block>
+            <!--
             <block type="pirouette">
                 <field name="repeat">1</field>
                 <field name="direction">Links</field>
             </block>
+            -->
         </category>
 
         <category name="Klänge" colour="#a55b5b">
@@ -157,7 +165,7 @@
         <category name="Einstellungen" colour="65">
             </block>
             <block type="motor">
-                <field name="motor">1</field>
+                <field name="motor">b</field>
                 <field name="velocity">15</field>
             </block>
             <!--turn display
@@ -166,15 +174,6 @@
 			</block>
             -->
         
-        </category>
-        <category name="Steuerung" colour="#5ba55b">
-            <block type="repetition">
-                <field name="repetition">1</field>
-            </block>
-			<block type="wait_seconds">
-				<field name="seconds">0.1</field>
-			</block>
-			<block type="start_block"></block>
         </category>
         <!-- Variables
         <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
