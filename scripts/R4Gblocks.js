@@ -7,7 +7,7 @@
 const delimiter = ':';
 const float_delimiter = '.0:';
 const fullVelocity = 'Gb15';
-let motorVelocity = {1:'31',2:'31'};
+let motorVelocity = {1:'15',2:'15'};
 
 // Movement combinations
 var combinations = [
@@ -20,7 +20,7 @@ var combinations = [
 // HELPER FUNCTIONS
 function send_combination(index=0, repetitions=1, intensity) {
 	/* send comination various times */
-	var code = 'Gb7' + delimiter;
+	var code = 'Gb10' + delimiter;
 	if(intensity == 'middle'){
 		code = 'Gb14' + delimiter
 	}
@@ -72,7 +72,7 @@ Blockly.Blocks['show_picture'] = {
 		this.appendDummyInput()
 			.appendField("Zeige");
 		this.appendDummyInput()
-			.appendField(new Blockly.FieldDropdown([["Fröhlich","1"],["Herz","2"],["Herz klein","3"],["Traurig","4"], ["Böse","5"],["Müde","6"],["Überrascht","7"],["Richtig","8"],["Falsch","9"]]), "pic")
+			.appendField(new Blockly.FieldDropdown([["Fröhlich","01"],["Herz","02"],["Herz klein","03"],["Traurig","04"], ["Böse","05"],["Müde","06"],["Überrascht","07"],["Richtig","08"],["Falsch","09"],["Zwinkern","10"],["Alien","11"],["Pfeil nach links","12"],["Pfeil nach rechts","13"]]), "pic")
 		this.appendDummyInput()
 			.appendField("für")
 			.appendField(new Blockly.FieldNumber(1, 1, 9, 1), "show_duration");
@@ -102,7 +102,7 @@ Blockly.Blocks['show_picture_async'] = {
 		this.appendDummyInput()
 			.appendField("Zeige");
 		this.appendDummyInput()
-			.appendField(new Blockly.FieldDropdown([["Fröhlich","1"],["Herz","2"],["Herz klein","3"],["Traurig","4"], ["Böse","5"],["Müde","6"],["Überrascht","7"],["Richtig","8"],["Falsch","9"]]), "picture")
+			.appendField(new Blockly.FieldDropdown([["Fröhlich","01"],["Herz","02"],["Herz klein","03"],["Traurig","04"], ["Böse","05"],["Müde","06"],["Überrascht","07"],["Richtig","08"],["Falsch","09"],["Zwinkern","10"],["Alien","11"],["Pfeil nach links","12"],["Pfeil nach rechts","13"]]), "picture")
 		this.setInputsInline(true);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -135,7 +135,7 @@ Blockly.Blocks['leds_off'] = {
 	}
 };
 Blockly.JavaScript['leds_off'] = function(block) {
-   var code = 'A0' + delimiter;
+   var code = 'A00' + delimiter;
    return code;
 };
 // block with input field for number or text
@@ -354,35 +354,30 @@ Blockly.JavaScript['shake'] = function (block) {
 	return send_combination(2, number_repeat, dropdown_intensity);
 };
 // Pirouette
-/* 
 Blockly.Blocks['pirouette'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Pirouette")
-			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
+			.appendField(new Blockly.FieldNumber(1, 0, 5, 1), "repeat")
 			.appendField("mal")
-			.appendField(new Blockly.FieldDropdown([["Links", "left"], ["Rechts", "right"]]), "direction");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(290);
-		this.setTooltip("Der Roboter dreht sich eine Sekunde lang im Kreis.");
+		this.setTooltip("Der Roboter dreht sich bis zu 5 mal im Kreis nach links und wieder zurück.");
 		this.setHelpUrl("");
 	}
 };
 Blockly.JavaScript['pirouette'] = function (block) {
-	var number_repetition = block.getFieldValue('repeat');
-	var dropdown_direction = block.getFieldValue('direction');
-	var code = fullVelocity + delimiter;
-	for(var r = 0; r < number_repetition; r++){
-		if(dropdown_direction == 'Links' || dropdown_direction == 'left')
-			code += 'BL1.0' + delimiter;
-		else
-			code += 'BR1.0' + delimiter;
-	}
+	// the robot turns around its center x times and back
+	var number_repeat = block.getFieldValue('repeat');
+	var turns = number_repeat * 1.5;
+	turns += turns % 1 == 0 ? float_delimiter : delimiter;
+	var code ='Gb20'+ delimiter +'BL'+ turns + 'W0.1' + delimiter + 'BR' + turns;
+	code += 'G1' + motorVelocity['1'] + delimiter;
+	code += 'G2' + motorVelocity['2'] + delimiter;
 	return code;
 };
-*/
 
 /*
 // LOGIC 
@@ -468,7 +463,7 @@ Blockly.Blocks['melody'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Spiele Melodie")
-			.appendField(new Blockly.FieldDropdown([["Tusch","M1"],["Romantisch","M2"],["Star Wars","M3"],["Super Mario","M4"],["Donauwalzer","M5"],["Tango Kriminalis","M6"],["Don't Worry be Happy","M7"],["Somewhere over the Rainbow","M8"],["Harry Potter","M9"]]), "melody");
+			.appendField(new Blockly.FieldDropdown([["Tusch","M01"],["Romantisch","M02"],["Star Wars","M03"],["Super Mario","M04"],["Donauwalzer","M05"],["Tango Kriminalis","M06"],["Don't Worry be Happy","M07"],["Somewhere over the Rainbow","M08"],["Harry Potter","M09"],["Happy Birthday","M10"]]), "melody");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);

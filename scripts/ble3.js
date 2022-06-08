@@ -89,7 +89,7 @@ function waitForConfirmation(counter) {
 			let decoder = new TextDecoder();
 			let value = decoder.decode(event.target.value).replace(/\r?\n|\r/,'');
 			console.log(`received: "${value}"`);
-			if (value == 'OK'){
+			if (value == 'OK' || value == "UC"){
 				resolve(counter + 1);
 			} else {
 				if(value == 'STOP') {
