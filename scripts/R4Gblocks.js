@@ -7,7 +7,7 @@
 const delimiter = ':';
 const float_delimiter = '.0:';
 const fullVelocity = 'Gb15';
-let motorVelocity = {1:'31',2:'31'};
+let motorVelocity = {1:'15',2:'15'};
 
 // Movement combinations
 var combinations = [
