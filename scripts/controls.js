@@ -1,7 +1,7 @@
 // Global scope variables
 const select = document.getElementById('generate');
 const delimiter_microbit = ':';
-const PATH_TO_HEX_FILE = 'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/makkelaig/Robo4earth/tree/master/microbit';
+const PATH_TO_HEX_FILE = 'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/ZimdAustria/Robo4earth/tree/master/microbit';
 var storage_items = [];
 
 function hideDropdowns() {
