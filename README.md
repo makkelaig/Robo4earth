@@ -1,13 +1,13 @@
 # Robo4earth
 Web application and Micro:bit program to wirelessly control a Micro:bit robot platform.
 
-![R4E System overview](Dokumentation/Diagramme/r4g_system_overview.png)
+<img src="Dokumentation/sdg_empty.jpg" style="width:311px;"/>   <img src="Dokumentation/robot1.jpg" style="width:400px;"/><br/>
 
 ## About the project
 Robo4earth builds on the project Robo4girls, a project funded by [netidee](https://www.netidee.at/Robo4girls) in 2018.
 The [ZIMD](www.zimd.at) (Center for Interaction, Media & Social Diversity) offers a workshop format, where girls build and program robots. The workshops are offered for girls in fifth grade. The aim of the workshops is to inspire the 10- to 11-year old girls in technology and especially robotics.
 
-This repository hosts the R4E web application, which can be reached at [robo4earth.zimd.at](https://robo4earth.zimd.at). The housing and base of the robots are build from wood and are personalized by the kids participating in the workshop.
+This repository hosts the R4E web application, which can be reached at [robo4earth.zimd.at](https://robo4earth.zimd.at). The housing and base of the robots are build from wood and are personalized by the kids participating in the workshop. If you want to build your own robot you find a shopping list as well as an instruction manual on our [robo4earth website](https://www.robo4earth.at/#roboter).
 
 ## Instructions
 
@@ -16,8 +16,6 @@ You can test our R4E App with a computer, a Micro:bit and an USB cable.
 #### List of materials
 + a [Micro:bit](https://microbit.org) with usb cable
 + a computer with internet access
-+ optionally a [piezo buzzer](https://de.wikipedia.org/wiki/Summer_(Elektronik))
-+ optionally 2 croco clamps to connect the buzzer to your Micro:bit. If you do not have croco clamps just use scotch tape and tape the ends of the buzzer cables to the pins of your Micro:bit.
 
 #### Prepare the Micro:bit
 Connect your Micro:bit to your computer via USB and load the R4E_MICROBIT.hex files on to your Micro:bit. You can download the universal hex file (for micro:bit version 1 and 2) from the web app. Click on the <i>Menu</i> button and choose <i>Hex Datei herunterladen</i>. If you do not know how to upload a program to your Micro:bit you can look it up [here](https://makecode.microbit.org/device/usb).
