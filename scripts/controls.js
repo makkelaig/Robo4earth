@@ -1,7 +1,7 @@
 // Global scope variables
 const select = document.getElementById('generate');
 const delimiter_microbit = ':';
-const PATH_TO_HEX_FILE = 'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/makkelaig/Robo4earth/tree/master/microbit';
+const PATH_TO_HEX_FILE = 'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/ZimdAustria/Robo4earth/tree/master/microbit';
 var storage_items = [];
 
 function hideDropdowns() {
@@ -20,6 +20,7 @@ function hideDropdowns() {
 function showMenu(element='myDropdown') {
 	/**
 	 * Toggle Dropdown Menu visibility
+	 * @param {element}	element html dropdown menu toggled
 	 */
 	if (document.getElementById(element).classList.contains('show')) {
 		hideDropdowns();
@@ -32,16 +33,37 @@ function showMenu(element='myDropdown') {
 window.onclick = function(event) {
 	/**
 	 * Hide Dropdown when user clicks anywhere else on screen
+	 * @param {event}	event user click event
 	 */
 	if (!event.target.matches('.dropbtn')) {
 		hideDropdowns();
 	}
 }
 
+function checkMicrobitCommands(code) {
+	/**
+	 * create commands list from code and check each command's length
+	 * @param {string} code string representation of a codeblock from blockly workspace
+	 */
+	var commands = code.split(delimiter_microbit);
+	commands = commands.filter(word => word != 'start');
+	/* micro:bit can only receive a maximum of 20 characters at once 
+	changed command length to 8 so kids can only write short messages with the write text block 
+	*/
+	var max_length = 8;
+	for (const i in commands) {
+		if (commands[i].length > max_length) {
+			commands[i] = commands[i].substring(0, max_length);
+		}
+		commands[i] += delimiter_microbit;
+	}
+	return commands;
+}
+
 function handlePlay(event) {
 	/**
 	 * Get code from blockly workspace and run it on Start button pressed
-	 * @param {event} event Reacts on Start button pressed
+	 * @param {event} event Start button pressed event in the DOM
 	 */
 	Blockly.JavaScript.addReservedWords('code');
 	var programs = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace()).split('\n');
@@ -56,16 +78,7 @@ function handlePlay(event) {
 		program.replace('start','');
 		code += program;
 	}
-	var commands = code.split(delimiter_microbit);
-	commands = commands.filter(word => word != 'start');
-	// micro:bit can only receive a maximum of 20 characters at once
-	var max_length = 19;
-	for (const i in commands) {
-		if (commands[i].length > max_length) {
-			commands[i] = commands[i].substring(0, max_length);
-		}
-		commands[i] += delimiter_microbit;
-	}
+	var commands = checkMicrobitCommands(code);
 	if(sending_data === false) {
 		return sendData(commands);
 	} else{return;}
@@ -109,6 +122,10 @@ function updateMenu() {
 }
 
 function validateUserInput(eingabe) {
+	/**
+	 * checks if a user input is a valid program name and if a program with the name already exists.
+	 * @param {string} eingabe user input
+	 */
 	if (eingabe === null || eingabe === '') {return 0;}
 	for (let i = 0; i < localStorage.length; i++) {
 		if (localStorage.key(i).includes('R4G_' + eingabe)) {
@@ -122,7 +139,8 @@ function validateUserInput(eingabe) {
 
 function writeToLocalStorage(eingabe) {
 	/**
-	 * writes a blockly program on the local storage of the device and updates selected program
+	 * writes a blockly program to the local storage of the device and updates selected program
+	 * @param {string} eingabe user input
 	 */
 	if(eingabe !== null) {
 		if (confirm('Programm "'+ eingabe +'" speichern?')) {
@@ -216,6 +234,7 @@ function deleteAll() {
 	/**
 	 * Delete all blockly programs from local storage
 	 */
+	createMenu(); //get all saved programs after page reload
 	if (storage_items.length === 0) {
 		alert('Keine gespeicherten Programme vorhanden');
 	} else {
@@ -255,6 +274,10 @@ function hexFileDownload() {
 }
 
 function downloadFile(filePath){
+	/**
+	 * downloads file to user device
+	 * @param {string} filePath path to download link
+	 */
     var downloadFrame = document.createElement('iframe');
 	downloadFrame.setAttribute('src',filePath);
 	downloadFrame.setAttribute('class', 'screenReaderText');

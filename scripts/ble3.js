@@ -31,7 +31,6 @@ disconnectButton.addEventListener('click', function() {
 });
 stopButton.addEventListener('click', function(){
 	stopButtonClicked = true;
-	//console.log("stop button clicked");
 });
 
 // FUNCTIONS
@@ -43,7 +42,9 @@ function onConnectButtonClick() {
 	return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
 	.then(device => connectDeviceAndCacheCharacteristic(device))
 	.then(() => {
+		// to subscribe for uart and temperature service from micro:bit:
 		//return Promise.all([startUartNotifications(characteristicCache_tx),startTemperatureNotifications(characteristicCache_temp)])
+		// to subscribe to uart service only:
 		return startUartNotifications(characteristicCache_tx);
 	})
 	.catch(error => {
@@ -88,7 +89,7 @@ function waitForConfirmation(counter) {
 			let decoder = new TextDecoder();
 			let value = decoder.decode(event.target.value).replace(/\r?\n|\r/,'');
 			console.log(`received: "${value}"`);
-			if (value == 'OK'){
+			if (value == 'OK' || value == "UC"){
 				resolve(counter + 1);
 			} else {
 				if(value == 'STOP') {
@@ -130,18 +131,17 @@ function sendData(commands, counter=0) {
 	Promise.race([
 		/**
 		 * Wait for confirmation from micro:bit that command has been executed
-		 * Trow timeout error if the micro:bit does not confirm action within 15 seconds
+		 * Trow timeout error if the micro:bit does not confirm action within 20 seconds
 		 * (longest possible action is 9 seconds)
 		 */
 		waitForConfirmation(counter),
-		timeout(15000).then(() => {
+		timeout(20000).then(() => {
 			sending_data = false;
 			throw new Error('No confirmation from micro:bit received within 15 seconds');
 		})
 	])
 	.then(function(counter){
 		/* Call self if not reached end of command list and stop button not clicked */
-		// console.log('success ' + counter);
 		if(counter < commands.length-1){
 			if(stopButtonClicked){
 				stopButtonClicked = false;
@@ -247,7 +247,9 @@ function connectDeviceAndCacheCharacteristic(device){
 	}
 	return device.gatt.connect()
 	.then(server => {
+		// for uart and temperature service:
 		//return Promise.all([getUartCharacteristics(server), getTemperatureCharacteristic(server)])
+		// for uart service only:
 		return getUartCharacteristics(server)
 		.then(values => console.log(values))
 	})
@@ -259,7 +261,8 @@ function connectDeviceAndCacheCharacteristic(device){
 
 function startUartNotifications(characteristic){
 	/**
-	 * Confirm device connected and start notifications
+	 * starts notifications from uart over bluetooth characteristic
+	 * @param {object}	characteristic Bluetooth characteristic to subscribe to
 	 */
 	return characteristic.startNotifications()
 	.then(() => {
@@ -275,6 +278,10 @@ function startUartNotifications(characteristic){
 }
 
 function startTemperatureNotifications(characteristic) {
+	/**
+	 * starts notifications from temperature characteristic
+	 * @param {object}	characteristic Bluetooth characteristic to subscribe to
+	 */
 	return characteristic.startNotifications()
 	.then(() => {
 		characteristic.addEventListener('characteristicvaluechanged',function(event) {

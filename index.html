@@ -7,10 +7,10 @@
 
     <title>R4E</title>
 	<!-- favicon files -->
-	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link rel="manifest" href="favicon/site.webmanifest">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
 
     <!-- scripts for blockly code -->
     <script src="blockly/blockly_compressed.js"></script>
@@ -51,15 +51,12 @@
     <table>
         <tr>
             <!-- Title, Logo and Program commands -->
-            <img src="media/logo/ecology.png" class="logo" style="float:left; height:10%;padding-top:0.5% ;">
+            <img src="media/logo/icon-4earth-erde-4.png" class="logo" style="float:left; height:10%;padding-top:0.5% ;">
         </tr>
         <tr>
             <td class="control_buttons">
                     <button id="start" onclick="handlePlay();" type="button" class="button green" style="float:left;font-size: 13px;padding-left:30px;padding-right:30px;">Start</button>
                     <button id="stop" type="button" class="button rosy" style="float:left; margin-left:20px;font-size: 13px;">Stopp</button>
-                    <!--
-                    <button id="downloadHex" onclick="hexFileUploadTipp();" type="button" class="download">Micro:bit Firmware Download</button>
-                    -->
             </td>
         </tr>
         <tr>
@@ -77,15 +74,24 @@
 
     <!-- R4G blocks design -->
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none;">
-        <!-- Category Movements -->
+        <!-- Categories -->
+        <category name="Steuerung" colour="#5ba55b">
+            <block type="start_block"></block>
+            <block type="repetition">
+                <field name="repetition">1</field>
+            </block>
+			<block type="wait_seconds">
+				<field name="seconds">1</field>
+			</block>
+        </category>
         <category name="LED-Anzeige" colour="#5ba593">
             <block type="show_text"></block>
             <block type="show_picture">
-                <field name="pic">1</field>
+                <field name="pic">01</field>
                 <field name="show_duration">1</field>
             </block>
             <block type="show_picture_async">
-                <field name="picture">1</field>
+                <field name="picture">01</field>
             </block>
             <block type="leds_off"></block>
             <!-- <block type="show_value"></block> -->
@@ -107,22 +113,22 @@
         -->
         <category name="Bewegungen" colour="#5b5ba5">
             <block type="forward">
-                <field name="forward_duration">0.1</field>
+                <field name="forward_duration">1</field>
             </block>
             <block type="back">
-                <field name="back_duration">0.1</field>
+                <field name="back_duration">1</field>
             </block>
             <block type="left">
-                <field name="left_duration">0.1</field>
+                <field name="left_duration">1</field>
             </block>
             <block type="right">
-                <field name="right_duration">0.1</field>
+                <field name="right_duration">1</field>
             </block>
             <block type="turn_left">
-                <field name="turn_left_duration">0.1</field>
+                <field name="turn_left_duration">1</field>
             </block>
             <block type="turn_right">
-                <field name="turn_right_duration">0.1</field>
+                <field name="turn_right_duration">1</field>
             </block>
         </category>
 
@@ -139,15 +145,16 @@
                 <field name="repeat">1</field>
                 <field name="intensity">kurz</field>
             </block>
+			<!--
             <block type="pirouette">
                 <field name="repeat">1</field>
-                <field name="direction">Links</field>
             </block>
+			-->
         </category>
 
         <category name="Klänge" colour="#a55b5b">
             <block type="melody">
-                <field name="melody">M1</field>
+                <field name="melody">M01</field>
             </block>
             <block type="sound">
                 <field name="sound">K01</field>
@@ -157,7 +164,7 @@
         <category name="Einstellungen" colour="65">
             </block>
             <block type="motor">
-                <field name="motor">1</field>
+                <field name="motor">b</field>
                 <field name="velocity">15</field>
             </block>
             <!--turn display
@@ -166,15 +173,6 @@
 			</block>
             -->
         
-        </category>
-        <category name="Steuerung" colour="#5ba55b">
-            <block type="repetition">
-                <field name="repetition">1</field>
-            </block>
-			<block type="wait_seconds">
-				<field name="seconds">0.1</field>
-			</block>
-			<block type="start_block"></block>
         </category>
         <!-- Variables
         <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
